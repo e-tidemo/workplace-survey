@@ -12,24 +12,47 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('workplace_survey')
 
-def get_workplace_data():
+def get_department_data():
     """
-    Get answers about workplace environment from employees
+    Get answers about what department the person answering works in
     """
     while True:
-        print("Please register what department you work in, design, hr, project management or customer service")
-        print("You need to enter the name of your department in lowercase letters")
+        print("Please register what department you work in\n")
+        print("Do you work in design, hr, project management or customer service? \n")
+        print("You need to enter the name of your department in lowercase letters \n")
 
         data_str = input("Enter your department here: ")
+        department_data = data_str.split(",")
 
-        work_data = data_str.split(",")
-        validate_data(work_data)
+        validate_data(department_data)
 
-        if validate_data(work_data):
+        if validate_data(department_data):
             print("Data is valid!")
             break
 
-    return work_data
+    return department_data
+
+
+
+def get_age_data():
+    """
+    Get answers about the age of the person answering the survey
+    """
+    while True:
+        print("Please register your age\n")
+        print("You need to enter your age in numbers \n")
+
+        age_str = input("Enter your age here: ")
+        age_data = age_str.split(",")
+
+        validate_data(age_data)
+
+        if validate_data(age_data):
+            print("Data is valid!")
+            break
+
+    return age_data
+
 
 def validate_data(values):
     """
@@ -46,4 +69,15 @@ def validate_data(values):
 
     return True
 
-data = get_workplace_data()
+def update_sheet1_worksheet(data):
+    """
+    Update survey worksheet, add new row with the list data provided
+    """
+    print("Updating Work Survey worksheet...\n")
+    work_worksheet = SHEET.worksheet("Sheet1")
+    work_worksheet.append_row(data)
+    print("Work survey worksheet updated successfully.\n")
+
+data = get_department_data()
+print(data)
+update_sheet1_worksheet(data)
