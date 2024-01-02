@@ -16,15 +16,34 @@ def get_workplace_data():
     """
     Get answers about workplace environment from employees
     """
-    print("Please answer the following questions as truthfully as possible")
+    while True:
+        print("Please register what department you work in, design, hr, project management or customer service")
+        print("You need to enter the name of your department in lowercase letters")
 
-    data_str = input("Enter your job title here: ")
+        data_str = input("Enter your department here: ")
 
-    work_data = data_str.split(",")
-    validate_data(work_data)
+        work_data = data_str.split(",")
+        validate_data(work_data)
+
+        if validate_data(work_data):
+            print("Data is valid!")
+            break
+
+    return work_data
 
 def validate_data(values):
-    print(values)
+    """
+    Raises ValueError if input is not a valid department
+    """
+    valid_departments = ["design", "hr", "project management", "customer service"]
 
+    try:
+        if values[0] not in valid_departments:
+            raise ValueError("This department does not exist here")
+    except ValueError as e:
+        print(f"Invalid data: {e}, please try again. \n")
+        return False
 
-get_workplace_data()
+    return True
+
+data = get_workplace_data()
