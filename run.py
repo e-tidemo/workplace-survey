@@ -43,9 +43,9 @@ def get_age_data():
 
         age_str = input("Enter your age here: ")
 
-        validate_data([age_str])
+        validate_age([age_str])
 
-        if validate_data[age_str]:
+        if validate_age([age_str]):
             print("Data is valid!")
             break
 
@@ -61,9 +61,9 @@ def get_gender_data():
 
         gender_str = input("Enter your gender here: ")
 
-        validate_data([gender_str])
+        validate_gender([gender_str])
 
-        if validate_data([gender_str]):
+        if validate_gender([gender_str]):
             print("Data is valid!")
             break
 
@@ -78,6 +78,35 @@ def validate_data(values):
     try:
         if values[0] not in valid_departments:
             raise ValueError("This department does not exist here")
+    except ValueError as e:
+        print(f"Invalid data: {e}, please try again. \n")
+        return False
+
+    return True
+
+def validate_age(values):
+    """
+    Raises ValueError if input is not a valid age
+    """
+    try:
+        age = int(values[0])
+        if age < 18 or age > 70:
+            raise ValueError("Age must be between 18 and 70")
+    except ValueError as e:
+        print(f"Invalid data: {e}, please try again. \n")
+        return False
+
+    return True
+
+def validate_gender(values):
+    """
+    Raises ValueError if input is not a valid gender
+    """
+    valid_genders = ["male", "female", "other"]
+
+    try:
+        if values[0] not in valid_genders:
+            raise ValueError("Gender must be male, female, or other")
     except ValueError as e:
         print(f"Invalid data: {e}, please try again. \n")
         return False
@@ -107,4 +136,4 @@ def update_sheet1_worksheet(data):
 
 all_survey_data = collect_survey_data()
 print(all_survey_data)
-update_sheet1_worksheet(data)
+update_sheet1_worksheet(all_survey_data)
