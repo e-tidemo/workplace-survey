@@ -12,8 +12,13 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('workplace_survey')
 
-results = SHEET.worksheet('Sheet1')
+def get_workplace_data():
+    """
+    Get answers about workplace environment from employees
+    """
+    print("Please answer the following questions as truthfully as possible")
 
-data = results.get_all_values()
+    data_str = input("Enter your job title here: ")
+    print(f"The job title you have entered is {data_str}")
 
-print(data)
+get_workplace_data()
