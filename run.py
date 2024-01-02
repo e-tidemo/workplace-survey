@@ -19,6 +19,12 @@ def get_workplace_data():
     print("Please answer the following questions as truthfully as possible")
 
     data_str = input("Enter your job title here: ")
-    print(f"The job title you have entered is {data_str}")
+
+    work_data = data_str.split(",")
+    validate_data(work_data)
+
+def validate_data(values):
+    print(values)
+
 
 get_workplace_data()
