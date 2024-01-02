@@ -22,15 +22,14 @@ def get_department_data():
         print("You need to enter the name of your department in lowercase letters \n")
 
         data_str = input("Enter your department here: ")
-        department_data = data_str.split(",")
 
-        validate_data(department_data)
+        validate_data([data_str])
 
-        if validate_data(department_data):
+        if validate_data([data_str]):
             print("Data is valid!")
             break
 
-    return department_data
+    return [data_str]
 
 
 
@@ -43,16 +42,32 @@ def get_age_data():
         print("You need to enter your age in numbers \n")
 
         age_str = input("Enter your age here: ")
-        age_data = age_str.split(",")
 
-        validate_data(age_data)
+        validate_data([age_str])
 
-        if validate_data(age_data):
+        if validate_data[age_str]:
             print("Data is valid!")
             break
 
-    return age_data
+    return [age_str]
 
+def get_gender_data():
+    """
+    Get answers about the gender of the person answering the survey
+    """
+    while True:
+        print("Please register your gender\n")
+        print("You need to enter your gender as male, female, or other \n")
+
+        gender_str = input("Enter your gender here: ")
+
+        validate_data([gender_str])
+
+        if validate_data([gender_str]):
+            print("Data is valid!")
+            break
+
+    return [gender_str]
 
 def validate_data(values):
     """
@@ -69,6 +84,18 @@ def validate_data(values):
 
     return True
 
+def collect_survey_data():
+    """
+    Collect all survey answers into one list
+    """
+    department_data = get_department_data()
+    age_data = get_age_data()
+    gender_data = get_gender_data()
+
+    survey_data = department_data + age_data + gender_data
+
+    return survey_data
+
 def update_sheet1_worksheet(data):
     """
     Update survey worksheet, add new row with the list data provided
@@ -78,6 +105,6 @@ def update_sheet1_worksheet(data):
     work_worksheet.append_row(data)
     print("Work survey worksheet updated successfully.\n")
 
-data = get_department_data()
-print(data)
+all_survey_data = collect_survey_data()
+print(all_survey_data)
 update_sheet1_worksheet(data)
