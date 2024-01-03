@@ -252,7 +252,7 @@ def age_group(age):
 def process_data(df):
     df['Age_Bucket'] = df['Age'].apply(age_group)
 
-# How to get data from spreadsheet into python is done with the help of code from Dataquest - see credits in README
+# Getting data from spreadsheet into python is done with the help of code from Dataquest - see credits in README
 def calculate_total_responses(worksheet, all_responses):
     data = worksheet.get_all_records()
     df = pd.DataFrame(data)
@@ -312,10 +312,7 @@ def count_urgency(worksheet):
     office_column = worksheet.col_values(worksheet.find("Office").col)
     social_column = worksheet.col_values(worksheet.find("Social").col)
     lunchroom_column = worksheet.col_values(worksheet.find("BReak room").col)
-    data = pd.DataFrame
 
-    office_data = data['Office'].value_counts()['terrible', 'bad', 'needs improvement']
-    print(office_data)
 
 
 def main():
@@ -332,4 +329,4 @@ def main():
     count_urgency(worksheet)
 
 print("Welcome to the first step in improving our work environment together!\n")
-# main()
+main()
