@@ -61,6 +61,6 @@ In the survey, the employees are asked to give their age, gender, department the
 
 
 ## Credits
-
+Age group definitions are from [https://towardsdatascience.com/cleaning-analyzing-and-visualizing-survey-data-in-python-42747a13c713]
 
 ## Acknowledgments

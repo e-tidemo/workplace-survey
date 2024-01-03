@@ -320,9 +320,7 @@ def main():
     process_data(df)
 
     count_all = calculate_total_responses(worksheet, ["terrible", "bad", "needs improvement", "good", "great"])
-    print(f"Total responses: {count_all}")
     calculate_correlation(worksheet, ["terrible", "bad", "needs improvement"])
-    print(f"Total responses: {count_all}")
 
 print("Welcome to the first step in improving our work environment together!\n")
 main()
