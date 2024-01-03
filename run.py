@@ -31,8 +31,6 @@ def get_department_data():
 
     return [data_str]
 
-
-
 def get_age_data():
     """
     Get answers about the age of the person answering the survey
@@ -57,7 +55,7 @@ def get_gender_data():
     """
     while True:
         print("Please register your gender\n")
-        print("You need to enter your gender as male, female, or other \n")
+        print("You need to enter your gender as male, female, or other. Remember to use lowercase letters. \n")
 
         gender_str = input("Enter your gender here: ")
 
@@ -68,6 +66,65 @@ def get_gender_data():
             break
 
     return [gender_str]
+
+def get_office_data():
+    """
+    Get answers about the physical work environment in the office
+    """
+    while True:
+        print("Take a moment and think about how you find the physical work environment in the office.\n")
+        print("Consider things like the heating, ergonomic aspect of your desk area, noise level, etc. \n")
+        print("You then need to enter how you feel the work environment is based on the scale 'terrible', 'bad', 'needs improvement', 'good', 'great'")
+        print("Please write your answer in lowercase letters")
+
+        office_str = input("Enter your view of the physical office work environment here: ")
+
+        validate_office([office_str])
+
+        if validate_office([office_str]):
+            print("Data is valid!")
+            break
+
+    return [office_str]
+
+def get_social_data():
+    """
+    Get answers about the social work environment
+    """
+    while True:
+        print("Take a moment and think about how you find the social work environment.\n")
+        print("You then need to enter how you feel the work environment is based on the scale 'terrible', 'bad', 'needs improvement', 'good', 'great'")
+        print("Please write your answer in lowercase letters")
+
+        social_str = input("Enter your view of the social work environment here: ")
+
+        validate_office([social_str])
+
+        if validate_office([social_str]):
+            print("Data is valid!")
+            break
+
+    return [social_str]
+
+def get_lunchroom_data():
+    """
+    Get answers about the physical work environment in the lunch room/ break room
+    """
+    while True:
+        print("Take a moment and think about how you find the physical work environment in the break room/lunch room.\n")
+        print("Consider things like the heating, noise level, enough space for everyone, etc. \n")
+        print("You then need to enter how you feel the environment in the break room is based on the scale 'terrible', 'bad', 'needs improvement', 'good', 'great'")
+        print("Please write your answer in lowercase letters")
+
+        lunchroom_str = input("Enter your view of the social work environment here: ")
+
+        validate_office([lunchroom_str])
+
+        if validate_office([lunchroom_str]):
+            print("Data is valid!")
+            break
+
+    return [lunchroom_str]
 
 def validate_data(values):
     """
@@ -107,6 +164,21 @@ def validate_gender(values):
     try:
         if values[0] not in valid_genders:
             raise ValueError("Gender must be male, female, or other")
+    except ValueError as e:
+        print(f"Invalid data: {e}, please try again. \n")
+        return False
+
+    return True
+
+def validate_office(values):
+    """
+    Raises ValueError if input is not one of the terrible - great-scale options
+    """
+    valid_office = ["terrible", "bad", "needs improvement", "good", "great"]
+
+    try:
+        if values[0] not in valid_office:
+            raise ValueError("The answer you have given is not one of the options in the scale from terrible to great")
     except ValueError as e:
         print(f"Invalid data: {e}, please try again. \n")
         return False
