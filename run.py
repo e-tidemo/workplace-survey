@@ -216,33 +216,68 @@ def update_sheet1_worksheet(data):
     work_worksheet.append_row(data)
     print("Work Environment Survey worksheet updated successfully.\n")
 
+# Calculations of correlations between positive/negative answers and age/gender
+# First - define age groups.
+# Code to define the age groups is from towadsdatascience.com
+def age_group(age):
+    
+    """
+    Creates an age bucket for each participant using the age variable.
+    Meant to be used on a DataFrame with .apply().
+    """
+    
+    # Convert to an int, in case the data is read in as an "object" (aka string)
+    age = int(age)
+    
+    if age < 30:
+        bucket = '<30'
+    
+    # Age 30 to 39 ('range' excludes upper bound)
+    if age in range(30, 35):
+        bucket = '30-34'
+        
+    if age in range(35, 40):
+        bucket = '35-39'
+        
+    if age in range(40, 45):
+        bucket = '40-44'
+    
+    if age in range(45, 50):
+        bucket = '45-49'
+   
+    if age >= 50:
+        bucket = '50+'
+
+    return bucket 
+
+def process_data(df):
+    df['Age_Bucket'] = df['Age'].apply(age_group)
+
+
 # How to get data from spreadsheet into python is done with the help of code from Dataquest - see credits in README
+
 def calculate_correlation(worksheet, negative_responses):
-    """
-    Calculate correlation between 'Age' and negative responses in different areas.
-    """
     data = worksheet.get_all_records()
     df = pd.DataFrame(data)
 
     print("Columns in DataFrame:")
     print(df.columns)
+    process_data(df)
 
-    negative_rows = df[df['Office'].isin(negative_responses) | df['Social'].isin(negative_responses) | df['Break room'].isin(negative_responses)]
-
-    correlation = negative_rows[['Age', 'Office', 'Social', 'Break room']].corr()
+    # Count occurrences of 'terrible', 'bad' and 'needs improvement' in specified age groups
+    age_groups_to_count = ['<30', '30-34','35-39', '40-44', '45-49', '50+']
+    negative_responses = ["terrible", "bad", "needs improvement"]
     
-    return correlation
+    for age_group in age_groups_to_count:
+        count_negative = df[df['Age_Bucket'] == age_group].apply(lambda row: row.isin(negative_responses)).sum(axis=1).sum()
+        print(f"Count of 'terrible', 'bad' and 'needs improvement' responses in age group {age_group}: {count_negative}")
 
 def main():
-    """
-    Run all program functions
-    """
     all_survey_data = collect_survey_data()
     print(all_survey_data)
     update_sheet1_worksheet(all_survey_data)
-    correlation_result = calculate_correlation(worksheet, ["terrible", "bad", "needs improvement"])
-    print(correlation_result)
 
+    calculate_correlation(worksheet, ["terrible", "bad", "needs improvement"])
 
 print("Welcome to the first step in improving our work environment together!\n")
 main()
