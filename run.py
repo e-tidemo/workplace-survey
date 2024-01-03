@@ -192,8 +192,11 @@ def collect_survey_data():
     department_data = get_department_data()
     age_data = get_age_data()
     gender_data = get_gender_data()
+    office_data = get_office_data()
+    social_data = get_social_data()
+    lunchroom_data = get_lunchroom_data()
 
-    survey_data = department_data + age_data + gender_data
+    survey_data = department_data + age_data + gender_data + office_data + social_data + lunchroom_data
 
     return survey_data
 
