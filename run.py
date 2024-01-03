@@ -1,5 +1,6 @@
 import gspread
 from google.oauth2.service_account import Credentials
+import pandas as pd
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -11,7 +12,12 @@ CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('workplace_survey')
+WORKSHEET_TITLE = 'Sheet1'
+spreadsheet = SHEET
+worksheet = spreadsheet.worksheet(WORKSHEET_TITLE)
 
+
+# Questions for the survey
 def get_department_data():
     """
     Get answers about what department the person answering works in
@@ -74,8 +80,8 @@ def get_office_data():
     while True:
         print("Take a moment and think about how you find the physical work environment in the office.\n")
         print("Consider things like the heating, ergonomic aspect of your desk area, noise level, etc. \n")
-        print("You then need to enter how you feel the work environment is based on the scale 'terrible', 'bad', 'needs improvement', 'good', 'great'")
-        print("Please write your answer in lowercase letters")
+        print("You then need to enter how you feel the work environment is based on the scale 'terrible', 'bad', 'needs improvement', 'good', 'great'.\n")
+        print("Please write your answer in lowercase letters. \n")
 
         office_str = input("Enter your view of the physical office work environment here: ")
 
@@ -93,8 +99,8 @@ def get_social_data():
     """
     while True:
         print("Take a moment and think about how you find the social work environment.\n")
-        print("You then need to enter how you feel the work environment is based on the scale 'terrible', 'bad', 'needs improvement', 'good', 'great'")
-        print("Please write your answer in lowercase letters")
+        print("You then need to enter how you feel the work environment is based on the scale 'terrible', 'bad', 'needs improvement', 'good', 'great'.\n")
+        print("Please write your answer in lowercase letters. \n")
 
         social_str = input("Enter your view of the social work environment here: ")
 
@@ -113,10 +119,10 @@ def get_lunchroom_data():
     while True:
         print("Take a moment and think about how you find the physical work environment in the break room/lunch room.\n")
         print("Consider things like the heating, noise level, enough space for everyone, etc. \n")
-        print("You then need to enter how you feel the environment in the break room is based on the scale 'terrible', 'bad', 'needs improvement', 'good', 'great'")
-        print("Please write your answer in lowercase letters")
+        print("You then need to enter how you feel the environment in the break room is based on the scale 'terrible', 'bad', 'needs improvement', 'good', 'great'.\n")
+        print("Please write your answer in lowercase letters.\n")
 
-        lunchroom_str = input("Enter your view of the social work environment here: ")
+        lunchroom_str = input("Enter your view of the environment in the break room/lunch room here: ")
 
         validate_office([lunchroom_str])
 
@@ -126,6 +132,7 @@ def get_lunchroom_data():
 
     return [lunchroom_str]
 
+# Make sure all inputs are valid data that will work in the survey
 def validate_data(values):
     """
     Raises ValueError if input is not a valid department
@@ -204,11 +211,40 @@ def update_sheet1_worksheet(data):
     """
     Update survey worksheet, add new row with the list data provided
     """
-    print("Updating Work Survey worksheet...\n")
+    print("Updating Work Environment Survey worksheet...\n")
     work_worksheet = SHEET.worksheet("Sheet1")
     work_worksheet.append_row(data)
-    print("Work survey worksheet updated successfully.\n")
+    print("Work Environment Survey worksheet updated successfully.\n")
 
-all_survey_data = collect_survey_data()
-print(all_survey_data)
-update_sheet1_worksheet(all_survey_data)
+# How to get data from spreadsheet into python is done with the help of code from Dataquest - see credits in README
+def calculate_correlation(worksheet, negative_responses):
+    """
+    Calculate correlation between 'Age' and negative responses in different areas.
+    """
+    data = worksheet.get_all_records()
+    df = pd.DataFrame(data)
+
+    print("Columns in DataFrame:")
+    print(df.columns)
+
+    negative_rows = df[df['Office'].isin(negative_responses) | df['Social'].isin(negative_responses) | df['Break room'].isin(negative_responses)]
+
+    correlation = negative_rows[['Age', 'Office', 'Social', 'Break room']].corr()
+    
+    return correlation
+
+def main():
+    """
+    Run all program functions
+    """
+    all_survey_data = collect_survey_data()
+    print(all_survey_data)
+    update_sheet1_worksheet(all_survey_data)
+    correlation_result = calculate_correlation(worksheet, ["terrible", "bad", "needs improvement"])
+    print(correlation_result)
+
+
+print("Welcome to the first step in improving our work environment together!\n")
+main()
+
+
