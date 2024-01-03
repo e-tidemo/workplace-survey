@@ -255,7 +255,6 @@ def process_data(df):
 
 
 # How to get data from spreadsheet into python is done with the help of code from Dataquest - see credits in README
-
 def calculate_correlation(worksheet, negative_responses):
     data = worksheet.get_all_records()
     df = pd.DataFrame(data)
@@ -270,7 +269,14 @@ def calculate_correlation(worksheet, negative_responses):
     
     for age_group in age_groups_to_count:
         count_negative = df[df['Age_Bucket'] == age_group].apply(lambda row: row.isin(negative_responses)).sum(axis=1).sum()
-        print(f"Count of 'terrible', 'bad' and 'needs improvement' responses in age group {age_group}: {count_negative}")
+        print(f"Count of negative ('terrible', 'bad' and 'needs improvement') responses in age group {age_group}: {count_negative}")
+    
+    # Count occurrences of 'terrible', 'bad' and 'needs improvement' in specified gender groups
+    gender_groups_to_count = ['male', 'female', 'other']
+    
+    for gender_group in gender_groups_to_count:
+        count_negative = df[df['Gender'] == gender_group].apply(lambda row: row.isin(negative_responses)).sum(axis=1).sum()
+        print(f"Count of negative responses in gender group {gender_group}: {count_negative}")
 
 def main():
     all_survey_data = collect_survey_data()
