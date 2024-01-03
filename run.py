@@ -16,7 +16,6 @@ WORKSHEET_TITLE = 'Sheet1'
 spreadsheet = SHEET
 worksheet = spreadsheet.worksheet(WORKSHEET_TITLE)
 
-
 # Questions for the survey
 def get_department_data():
     """
@@ -253,8 +252,40 @@ def age_group(age):
 def process_data(df):
     df['Age_Bucket'] = df['Age'].apply(age_group)
 
-
 # How to get data from spreadsheet into python is done with the help of code from Dataquest - see credits in README
+def calculate_total_responses(worksheet, all_responses):
+    data = worksheet.get_all_records()
+    df = pd.DataFrame(data)
+
+    print("Columns in DataFrame:")
+    print(df.columns)
+    process_data(df)
+
+    # Count occurrences of all responses in specified age groups
+    age_groups_to_count = ['<30', '30-34','35-39', '40-44', '45-49', '50+']
+    
+    print("Number of responses in each age group:")
+    for age_group in age_groups_to_count:
+        count_all = df[df['Age_Bucket'] == age_group].apply(lambda row: row.isin(all_responses)).sum(axis=1).sum()
+        print(f"{age_group}: {count_all}")
+    
+    # Count occurrences of all responses in specified gender groups
+    gender_groups_to_count = ['male', 'female', 'other']
+    
+    print("\nNumber of responses in each gender group:")
+    for gender_group in gender_groups_to_count:
+        count_all = df[df['Gender'] == gender_group].apply(lambda row: row.isin(all_responses)).sum(axis=1).sum()
+        print(f"{gender_group}: {count_all}")
+    
+    # Count occurrences of 'terrible', 'bad' and 'needs improvement' in specified gender groups
+    gender_groups_to_count = ['male', 'female', 'other']
+    
+    print("\nNumber of negative responses in each gender group:")
+    for gender_group in gender_groups_to_count:
+        count_all = df[df['Gender'] == gender_group].apply(lambda row: row.isin(all_responses)).sum(axis=1).sum()
+        print(f"{gender_group}: {count_all}")
+
+
 def calculate_correlation(worksheet, negative_responses):
     data = worksheet.get_all_records()
     df = pd.DataFrame(data)
@@ -263,27 +294,40 @@ def calculate_correlation(worksheet, negative_responses):
     print(df.columns)
     process_data(df)
 
+    negative_responses = ["terrible", "bad", "needs improvement"]
+
     # Count occurrences of 'terrible', 'bad' and 'needs improvement' in specified age groups
     age_groups_to_count = ['<30', '30-34','35-39', '40-44', '45-49', '50+']
-    negative_responses = ["terrible", "bad", "needs improvement"]
     
+    print("Number of negative responses in each age group:")
     for age_group in age_groups_to_count:
         count_negative = df[df['Age_Bucket'] == age_group].apply(lambda row: row.isin(negative_responses)).sum(axis=1).sum()
-        print(f"Count of negative ('terrible', 'bad' and 'needs improvement') responses in age group {age_group}: {count_negative}")
+        print(f"{age_group}: {count_negative}")
     
     # Count occurrences of 'terrible', 'bad' and 'needs improvement' in specified gender groups
     gender_groups_to_count = ['male', 'female', 'other']
     
+    print("\nNumber of negative responses in each gender group:")
     for gender_group in gender_groups_to_count:
         count_negative = df[df['Gender'] == gender_group].apply(lambda row: row.isin(negative_responses)).sum(axis=1).sum()
-        print(f"Count of negative responses in gender group {gender_group}: {count_negative}")
+        print(f"{gender_group}: {count_negative}")
+
+
+    
 
 def main():
     all_survey_data = collect_survey_data()
     print(all_survey_data)
     update_sheet1_worksheet(all_survey_data)
+    data = worksheet.get_all_records()
+    df = pd.DataFrame(data)
 
+    process_data(df)
+
+    calculate_total_responses(worksheet, ["terrible", "bad", "needs improvement", "good", "great"])
     calculate_correlation(worksheet, ["terrible", "bad", "needs improvement"])
+
+
 
 print("Welcome to the first step in improving our work environment together!\n")
 main()
