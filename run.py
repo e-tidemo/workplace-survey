@@ -214,10 +214,11 @@ def update_sheet1_worksheet(data):
     work_worksheet = SHEET.worksheet("Sheet1")
     work_worksheet.append_row(data)
     print("Work Environment Survey worksheet updated successfully.\n")
+    print("Analyzing results...")
 
 # Calculations of correlations between positive/negative answers and age/gender
 # First - define age groups.
-# Code to define the age groups is from towadsdatascience.com
+# Code to define the age groups is from towardsdatascience.com
 def age_group(age):
     
     """
@@ -225,13 +226,12 @@ def age_group(age):
     Meant to be used on a DataFrame with .apply().
     """
     
-    # Convert to an int, in case the data is read in as an "object" (aka string)
+    # Convert to an int, in case the data is read in as a string
     age = int(age)
     
     if age < 30:
         bucket = '<30'
     
-    # Age 30 to 39 ('range' excludes upper bound)
     if age in range(30, 35):
         bucket = '30-34'
         
@@ -257,8 +257,6 @@ def calculate_total_responses(worksheet, all_responses):
     data = worksheet.get_all_records()
     df = pd.DataFrame(data)
 
-    print("Columns in DataFrame:")
-    print(df.columns)
     process_data(df)
 
     # Count occurrences of all responses in specified age groups
@@ -310,6 +308,16 @@ def calculate_correlation(worksheet, negative_responses):
 
     return count_all, count_negative
 
+def count_urgency(worksheet):
+    office_column = worksheet.col_values(worksheet.find("Office").col)
+    social_column = worksheet.col_values(worksheet.find("Social").col)
+    lunchroom_column = worksheet.col_values(worksheet.find("BReak room").col)
+    data = pd.DataFrame
+
+    office_data = data['Office'].value_counts()['terrible', 'bad', 'needs improvement']
+    print(office_data)
+
+
 def main():
     all_survey_data = collect_survey_data()
     print(all_survey_data)
@@ -321,6 +329,7 @@ def main():
 
     count_all = calculate_total_responses(worksheet, ["terrible", "bad", "needs improvement", "good", "great"])
     calculate_correlation(worksheet, ["terrible", "bad", "needs improvement"])
+    count_urgency(worksheet)
 
 print("Welcome to the first step in improving our work environment together!\n")
-main()
+# main()
