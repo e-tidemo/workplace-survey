@@ -276,16 +276,10 @@ def calculate_total_responses(worksheet, all_responses):
     for gender_group in gender_groups_to_count:
         count_all = df[df['Gender'] == gender_group].apply(lambda row: row.isin(all_responses)).sum(axis=1).sum()
         print(f"{gender_group}: {count_all}")
-    
-    # Count occurrences of 'terrible', 'bad' and 'needs improvement' in specified gender groups
-    gender_groups_to_count = ['male', 'female', 'other']
-    
-    print("\nNumber of negative responses in each gender group:")
-    for gender_group in gender_groups_to_count:
-        count_all = df[df['Gender'] == gender_group].apply(lambda row: row.isin(all_responses)).sum(axis=1).sum()
-        print(f"{gender_group}: {count_all}")
 
-
+    return count_all
+    
+# Count occurrences of 'terrible', 'bad' and 'needs improvement' in specified gender groups
 def calculate_correlation(worksheet, negative_responses):
     data = worksheet.get_all_records()
     df = pd.DataFrame(data)
@@ -302,7 +296,8 @@ def calculate_correlation(worksheet, negative_responses):
     print("Number of negative responses in each age group:")
     for age_group in age_groups_to_count:
         count_negative = df[df['Age_Bucket'] == age_group].apply(lambda row: row.isin(negative_responses)).sum(axis=1).sum()
-        print(f"{age_group}: {count_negative}")
+        count_all = df[df['Age_Bucket'] == age_group].apply(lambda row: row.isin(["terrible", "bad", "needs improvement", "good", "great"])).sum(axis=1).sum()
+        print(f"{age_group}: {count_negative} out of {count_all}")
     
     # Count occurrences of 'terrible', 'bad' and 'needs improvement' in specified gender groups
     gender_groups_to_count = ['male', 'female', 'other']
@@ -310,10 +305,10 @@ def calculate_correlation(worksheet, negative_responses):
     print("\nNumber of negative responses in each gender group:")
     for gender_group in gender_groups_to_count:
         count_negative = df[df['Gender'] == gender_group].apply(lambda row: row.isin(negative_responses)).sum(axis=1).sum()
-        print(f"{gender_group}: {count_negative}")
+        count_all = df[df['Gender'] == gender_group].apply(lambda row: row.isin(["terrible", "bad", "needs improvement", "good", "great"])).sum(axis=1).sum()
+        print(f"{gender_group}: {count_negative} out of {count_all}")
 
-
-    
+    return count_all, count_negative
 
 def main():
     all_survey_data = collect_survey_data()
@@ -324,12 +319,10 @@ def main():
 
     process_data(df)
 
-    calculate_total_responses(worksheet, ["terrible", "bad", "needs improvement", "good", "great"])
+    count_all = calculate_total_responses(worksheet, ["terrible", "bad", "needs improvement", "good", "great"])
+    print(f"Total responses: {count_all}")
     calculate_correlation(worksheet, ["terrible", "bad", "needs improvement"])
-
-
+    print(f"Total responses: {count_all}")
 
 print("Welcome to the first step in improving our work environment together!\n")
 main()
-
-
