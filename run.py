@@ -208,7 +208,31 @@ def update_sheet1_worksheet(data):
     work_worksheet = SHEET.worksheet("Sheet1")
     work_worksheet.append_row(data)
     print("Work Environment Survey worksheet updated successfully.\n")
-    print("Analyzing results...")
+    print("Thank you for your participation! We will talk more about work environment and the results of this survey at our next Monday meeting. \n")
+    print("If you are admin staff you can enter a password to see the results of the survey. \n")
+
+def show_results_password():
+    while True:
+        password_str = input("Enter the password here: \n")
+        if validate_password([password_str]):
+            return True
+        else:
+            print("If you are part of the admin staff, re-enter the password. \n")
+
+def validate_password(values):
+    """
+    Raises ValueError if input is not one of the terrible - great-scale options
+    """
+    valid_password = ["admin"]
+
+    try:
+        if values[0] not in valid_password:
+            raise ValueError("The password you have submitted is not correct")
+    except ValueError as e:
+        print(f"Invalid data: {e}, please try again or leave the survey if you do not have admin access. \n")
+        return False
+
+    return True
 
 # Calculations of correlations between positive/negative answers and age/gender
 # First - define age groups.
@@ -318,7 +342,7 @@ def calculate_urgent(worksheet, negative_responses, count_all):
 
     columns_to_count = ['Office', 'Social', 'Break room']
 
-    print("The area with the most negative responses is:")
+    print("Percentage of negative responses in each area:")
 
     for column in columns_to_count:
         count_negative = 0
@@ -335,6 +359,7 @@ def calculate_urgent(worksheet, negative_responses, count_all):
     return count_all, count_negative
 
 
+
 def main():
     all_survey_data = collect_survey_data()
     update_sheet1_worksheet(all_survey_data)
@@ -343,9 +368,11 @@ def main():
 
     process_data(df)
 
-    
-    calculate_correlation(worksheet, ["terrible", "bad", "needs improvement"])
-    calculate_urgent(worksheet, 'negative_responses', 'count_all')
+    if show_results_password():
+        calculate_correlation(worksheet, ["terrible", "bad", "needs improvement"])
+        calculate_urgent(worksheet, 'negative_responses', 'count_all')
+    else:
+        pass
 
 
 print("Welcome to the first step in improving our work environment together!\n")
