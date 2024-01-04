@@ -251,31 +251,6 @@ def age_group(age):
 
 def process_data(df):
     df['Age_Bucket'] = df['Age'].apply(age_group)
-
-# Getting data from spreadsheet into python is done with the help of code from Dataquest - see credits in README
-def calculate_total_responses(worksheet, all_responses):
-    data = worksheet.get_all_records()
-    df = pd.DataFrame(data)
-
-    process_data(df)
-
-    # Count occurrences of all responses in specified age groups
-    age_groups_to_count = ['<30', '30-34','35-39', '40-44', '45-49', '50+']
-    
-    print("Number of responses in each age group:")
-    for age_group in age_groups_to_count:
-        count_all = df[df['Age_Bucket'] == age_group].apply(lambda row: row.isin(all_responses)).sum(axis=1).sum()
-        print(f"{age_group}: {count_all}")
-    
-    # Count occurrences of all responses in specified gender groups
-    gender_groups_to_count = ['male', 'female', 'other']
-    
-    print("\nNumber of responses in each gender group:")
-    for gender_group in gender_groups_to_count:
-        count_all = df[df['Gender'] == gender_group].apply(lambda row: row.isin(all_responses)).sum(axis=1).sum()
-        print(f"{gender_group}: {count_all}")
-
-    return count_all
     
 # Count occurrences of 'terrible', 'bad' and 'needs improvement' in specified gender groups
 def calculate_correlation(worksheet, negative_responses):
@@ -288,30 +263,49 @@ def calculate_correlation(worksheet, negative_responses):
 
     negative_responses = ["terrible", "bad", "needs improvement"]
 
-    # Count occurrences of 'terrible', 'bad' and 'needs improvement' in specified age groups
-    age_groups_to_count = ['<30', '30-34','35-39', '40-44', '45-49', '50+']
-    
-    print("Number of negative responses in each age group:")
+    age_groups_to_count = ['<30', '30-34', '35-39', '40-44', '45-49', '50+']
+
+    print("Amount of negative responses in each age group:")
+
     for age_group in age_groups_to_count:
-        count_negative = df[df['Age_Bucket'] == age_group].apply(lambda row: row.isin(negative_responses)).sum(axis=1).sum()
-        count_all = df[df['Age_Bucket'] == age_group].apply(lambda row: row.isin(["terrible", "bad", "needs improvement", "good", "great"])).sum(axis=1).sum()
-        print(f"{age_group}: {count_negative} out of {count_all}")
     
-    # Count occurrences of 'terrible', 'bad' and 'needs improvement' in specified gender groups
+        count_negative = 0
+        count_all = 0
+    
+        filtered_df = df[df['Age_Bucket'] == age_group]
+    
+        for index, row in filtered_df.iterrows():
+            for response in row:
+                if response in negative_responses:
+                    count_negative += 1
+                if response in negative_responses + ["good", "great"]:
+                    count_all += 1
+    
+        neg_percent_age = int((count_negative / count_all * 100)) if count_all != 0 else 0
+        print(f"{age_group}: {neg_percent_age}%")            
+
     gender_groups_to_count = ['male', 'female', 'other']
-    
-    print("\nNumber of negative responses in each gender group:")
+    print("Amount of negative responses in each gender group:")
+
     for gender_group in gender_groups_to_count:
-        count_negative = df[df['Gender'] == gender_group].apply(lambda row: row.isin(negative_responses)).sum(axis=1).sum()
-        count_all = df[df['Gender'] == gender_group].apply(lambda row: row.isin(["terrible", "bad", "needs improvement", "good", "great"])).sum(axis=1).sum()
-        print(f"{gender_group}: {count_negative} out of {count_all}")
+    
+        count_negative = 0
+        count_all = 0
+    
+        filtered_df = df[df['Gender'] == gender_group]
+    
+        for index, row in filtered_df.iterrows():
+            for response in row:
+                if response in negative_responses:
+                    count_negative += 1
+                if response in negative_responses + ["good", "great"]:
+                    count_all += 1
+        neg_percent_gender = int((count_negative / count_all * 100)) if count_all != 0 else 0
+        print(f"{gender_group}: {neg_percent_gender}%")  
 
     return count_all, count_negative
 
-def count_urgency(worksheet):
-    office_column = worksheet.col_values(worksheet.find("Office").col)
-    social_column = worksheet.col_values(worksheet.find("Social").col)
-    lunchroom_column = worksheet.col_values(worksheet.find("BReak room").col)
+
 
 
 
@@ -324,9 +318,9 @@ def main():
 
     process_data(df)
 
-    count_all = calculate_total_responses(worksheet, ["terrible", "bad", "needs improvement", "good", "great"])
+    
     calculate_correlation(worksheet, ["terrible", "bad", "needs improvement"])
-    count_urgency(worksheet)
+
 
 print("Welcome to the first step in improving our work environment together!\n")
 main()
