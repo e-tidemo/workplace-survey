@@ -306,7 +306,33 @@ def calculate_correlation(worksheet, negative_responses):
     return count_all, count_negative
 
 
+def calculate_urgent(worksheet, negative_responses, count_all):
+    data = worksheet.get_all_records()
+    df = pd.DataFrame(data)
 
+    print("Columns in DataFrame:")
+    print(df.columns)
+    process_data(df)
+
+    negative_responses = ["terrible", "bad", "needs improvement"]
+
+    columns_to_count = ['Office', 'Social', 'Break room']
+
+    print("The area with the most negative responses is:")
+
+    for column in columns_to_count:
+        count_negative = 0
+        count_all = 0
+    
+        for index, response in df[column].items():
+            if response in negative_responses:
+                count_negative += 1
+            if response in negative_responses + ["good", "great"]:
+                count_all += 1
+        neg_percent_columns = int((count_negative / count_all * 100)) if count_all != 0 else 0
+        print(f"{column}: {neg_percent_columns}%")
+        
+    return count_all, count_negative
 
 
 def main():
@@ -320,6 +346,7 @@ def main():
 
     
     calculate_correlation(worksheet, ["terrible", "bad", "needs improvement"])
+    calculate_urgent(worksheet, 'negative_responses', 'count_all')
 
 
 print("Welcome to the first step in improving our work environment together!\n")
