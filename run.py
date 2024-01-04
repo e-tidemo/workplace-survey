@@ -1,6 +1,7 @@
 import gspread
 from google.oauth2.service_account import Credentials
 import pandas as pd
+from operator import itemgetter
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -342,7 +343,9 @@ def calculate_urgent(worksheet, negative_responses, count_all):
 
     columns_to_count = ['Office', 'Social', 'Break room']
 
-    print("Percentage of negative responses in each area:")
+    print("Amount of negative opinions in each area, presented in order from highest percentage to lowest:")
+
+    results = []
 
     for column in columns_to_count:
         count_negative = 0
@@ -354,7 +357,12 @@ def calculate_urgent(worksheet, negative_responses, count_all):
             if response in negative_responses + ["good", "great"]:
                 count_all += 1
         neg_percent_columns = int((count_negative / count_all * 100)) if count_all != 0 else 0
-        print(f"{column}: {neg_percent_columns}%")
+        results.append((column, neg_percent_columns))
+
+    results.sort(reverse=True, key=itemgetter(1))
+
+    for column, percentage in results:
+        print(f"{column}: {percentage}%")
         
     return count_all, count_negative
 
