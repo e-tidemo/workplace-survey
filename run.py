@@ -1,4 +1,5 @@
 import gspread
+import os
 from google.oauth2.service_account import Credentials
 import pandas as pd
 from operator import itemgetter
@@ -62,7 +63,8 @@ def get_gender_data():
     """
     while True:
         print("Please register your gender\n")
-        print("You need to enter your gender as male, female, or other. Remember to use lowercase letters. \n")
+        print("You need to enter your gender as male, female, or other.") 
+        print("Remember to use lowercase letters. \n")
 
         gender_str = input("Enter your gender here: \n")
 
@@ -238,7 +240,7 @@ def validate_password(values):
     """
     Raises ValueError if input is not one of the terrible - great-scale options
     """
-    valid_password = ["admin"]
+    valid_password = os.environ.get("ADMIN")
 
     try:
         if values[0] not in valid_password:
