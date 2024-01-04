@@ -31,7 +31,6 @@ def get_department_data():
         validate_data([data_str])
 
         if validate_data([data_str]):
-            print("Data is valid!")
             break
 
     return [data_str]
@@ -49,7 +48,6 @@ def get_age_data():
         validate_age([age_str])
 
         if validate_age([age_str]):
-            print("Data is valid!")
             break
 
     return [age_str]
@@ -67,7 +65,6 @@ def get_gender_data():
         validate_gender([gender_str])
 
         if validate_gender([gender_str]):
-            print("Data is valid!")
             break
 
     return [gender_str]
@@ -87,7 +84,6 @@ def get_office_data():
         validate_office([office_str])
 
         if validate_office([office_str]):
-            print("Data is valid!")
             break
 
     return [office_str]
@@ -106,7 +102,6 @@ def get_social_data():
         validate_office([social_str])
 
         if validate_office([social_str]):
-            print("Data is valid!")
             break
 
     return [social_str]
@@ -126,7 +121,6 @@ def get_lunchroom_data():
         validate_office([lunchroom_str])
 
         if validate_office([lunchroom_str]):
-            print("Data is valid!")
             break
 
     return [lunchroom_str]
@@ -254,6 +248,9 @@ def process_data(df):
     
 # Count occurrences of 'terrible', 'bad' and 'needs improvement' in specified gender groups
 def calculate_correlation(worksheet, negative_responses):
+    """
+    Calculate the amount of negative responses in each age and gender group
+    """
     data = worksheet.get_all_records()
     df = pd.DataFrame(data)
 
@@ -307,6 +304,9 @@ def calculate_correlation(worksheet, negative_responses):
 
 
 def calculate_urgent(worksheet, negative_responses, count_all):
+    """
+    Calculates the percentage of negative responses in each area of work environment and presents the area with most negative responses
+    """
     data = worksheet.get_all_records()
     df = pd.DataFrame(data)
 
@@ -337,7 +337,6 @@ def calculate_urgent(worksheet, negative_responses, count_all):
 
 def main():
     all_survey_data = collect_survey_data()
-    print(all_survey_data)
     update_sheet1_worksheet(all_survey_data)
     data = worksheet.get_all_records()
     df = pd.DataFrame(data)
@@ -350,4 +349,5 @@ def main():
 
 
 print("Welcome to the first step in improving our work environment together!\n")
+print("In the following survey you will need to answer in lowercase letters. Please take some time to read the instructions that come with each question and take some time to think about your answers. \n")
 main()
