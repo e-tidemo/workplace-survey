@@ -27,7 +27,7 @@ def get_department_data():
         print("Do you work in design, hr, project management or customer service? \n")
         print("You need to enter the name of your department in lowercase letters \n")
 
-        data_str = input("Enter your department here: ")
+        data_str = input("Enter your department here: \n")
 
         validate_data([data_str])
 
@@ -44,7 +44,7 @@ def get_age_data():
         print("Please register your age\n")
         print("You need to enter your age in numbers \n")
 
-        age_str = input("Enter your age here: ")
+        age_str = input("Enter your age here: \n")
 
         validate_age([age_str])
 
@@ -61,7 +61,7 @@ def get_gender_data():
         print("Please register your gender\n")
         print("You need to enter your gender as male, female, or other. Remember to use lowercase letters. \n")
 
-        gender_str = input("Enter your gender here: ")
+        gender_str = input("Enter your gender here: \n")
 
         validate_gender([gender_str])
 
@@ -80,7 +80,7 @@ def get_office_data():
         print("You then need to enter how you feel the work environment is based on the scale 'terrible', 'bad', 'needs improvement', 'good', 'great'.\n")
         print("Please write your answer in lowercase letters. \n")
 
-        office_str = input("Enter your view of the physical office work environment here: ")
+        office_str = input("Enter your view of the physical office work environment here: \n")
 
         validate_office([office_str])
 
@@ -98,7 +98,7 @@ def get_social_data():
         print("You then need to enter how you feel the work environment is based on the scale 'terrible', 'bad', 'needs improvement', 'good', 'great'.\n")
         print("Please write your answer in lowercase letters. \n")
 
-        social_str = input("Enter your view of the social work environment here: ")
+        social_str = input("Enter your view of the social work environment here: \n")
 
         validate_office([social_str])
 
@@ -117,7 +117,7 @@ def get_lunchroom_data():
         print("You then need to enter how you feel the environment in the break room is based on the scale 'terrible', 'bad', 'needs improvement', 'good', 'great'.\n")
         print("Please write your answer in lowercase letters.\n")
 
-        lunchroom_str = input("Enter your view of the environment in the break room/lunch room here: ")
+        lunchroom_str = input("Enter your view of the environment in the break room/lunch room here: \n")
 
         validate_office([lunchroom_str])
 
