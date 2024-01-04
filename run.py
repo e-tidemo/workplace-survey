@@ -17,6 +17,7 @@ WORKSHEET_TITLE = 'Sheet1'
 spreadsheet = SHEET
 worksheet = spreadsheet.worksheet(WORKSHEET_TITLE)
 
+
 # Questions for the survey
 def get_department_data():
     """
@@ -36,6 +37,7 @@ def get_department_data():
 
     return [data_str]
 
+
 def get_age_data():
     """
     Get answers about the age of the person answering the survey
@@ -53,6 +55,7 @@ def get_age_data():
 
     return [age_str]
 
+
 def get_gender_data():
     """
     Get answers about the gender of the person answering the survey
@@ -69,6 +72,7 @@ def get_gender_data():
             break
 
     return [gender_str]
+
 
 def get_office_data():
     """
@@ -89,6 +93,7 @@ def get_office_data():
 
     return [office_str]
 
+
 def get_social_data():
     """
     Get answers about the social work environment
@@ -106,6 +111,7 @@ def get_social_data():
             break
 
     return [social_str]
+
 
 def get_lunchroom_data():
     """
@@ -126,6 +132,7 @@ def get_lunchroom_data():
 
     return [lunchroom_str]
 
+
 # Make sure all inputs are valid data that will work in the survey
 def validate_data(values):
     """
@@ -142,6 +149,7 @@ def validate_data(values):
 
     return True
 
+
 def validate_age(values):
     """
     Raises ValueError if input is not a valid age
@@ -155,6 +163,7 @@ def validate_age(values):
         return False
 
     return True
+
 
 def validate_gender(values):
     """
@@ -171,6 +180,7 @@ def validate_gender(values):
 
     return True
 
+
 def validate_office(values):
     """
     Raises ValueError if input is not one of the terrible - great-scale options
@@ -185,6 +195,7 @@ def validate_office(values):
         return False
 
     return True
+
 
 def collect_survey_data():
     """
@@ -201,6 +212,7 @@ def collect_survey_data():
 
     return survey_data
 
+
 def update_sheet1_worksheet(data):
     """
     Update survey worksheet, add new row with the list data provided
@@ -212,6 +224,7 @@ def update_sheet1_worksheet(data):
     print("Thank you for your participation! We will talk more about work environment and the results of this survey at our next Monday meeting. \n")
     print("If you are admin staff you can enter a password to see the results of the survey. \n")
 
+
 def show_results_password():
     while True:
         password_str = input("Enter the password here: \n")
@@ -219,6 +232,7 @@ def show_results_password():
             return True
         else:
             print("If you are part of the admin staff, re-enter the password. \n")
+
 
 def validate_password(values):
     """
@@ -235,42 +249,43 @@ def validate_password(values):
 
     return True
 
+
 # Calculations of correlations between positive/negative answers and age/gender
 # First - define age groups.
 # Code to define the age groups is from towardsdatascience.com
 def age_group(age):
-    
     """
     Creates an age bucket for each participant using the age variable.
     Meant to be used on a DataFrame with .apply().
     """
-    
+
     # Convert to an int, in case the data is read in as a string
     age = int(age)
-    
     if age < 30:
         bucket = '<30'
-    
+
     if age in range(30, 35):
         bucket = '30-34'
-        
+
     if age in range(35, 40):
         bucket = '35-39'
-        
+
     if age in range(40, 45):
         bucket = '40-44'
-    
+
     if age in range(45, 50):
         bucket = '45-49'
-   
+
     if age >= 50:
         bucket = '50+'
 
-    return bucket 
+    return bucket
+
 
 def process_data(df):
     df['Age_Bucket'] = df['Age'].apply(age_group)
-    
+
+
 # Count occurrences of 'terrible', 'bad' and 'needs improvement' in specified gender groups
 def calculate_correlation(worksheet, negative_responses):
     """
@@ -290,32 +305,32 @@ def calculate_correlation(worksheet, negative_responses):
     print("Amount of negative responses in each age group:")
 
     for age_group in age_groups_to_count:
-    
+
         count_negative = 0
         count_all = 0
-    
+
         filtered_df = df[df['Age_Bucket'] == age_group]
-    
+
         for index, row in filtered_df.iterrows():
             for response in row:
                 if response in negative_responses:
                     count_negative += 1
                 if response in negative_responses + ["good", "great"]:
                     count_all += 1
-    
+
         neg_percent_age = int((count_negative / count_all * 100)) if count_all != 0 else 0
-        print(f"{age_group}: {neg_percent_age}%")            
+        print(f"{age_group}: {neg_percent_age}%")
 
     gender_groups_to_count = ['male', 'female', 'other']
     print("Amount of negative responses in each gender group:")
 
     for gender_group in gender_groups_to_count:
-    
+
         count_negative = 0
         count_all = 0
-    
+
         filtered_df = df[df['Gender'] == gender_group]
-    
+
         for index, row in filtered_df.iterrows():
             for response in row:
                 if response in negative_responses:
@@ -323,7 +338,7 @@ def calculate_correlation(worksheet, negative_responses):
                 if response in negative_responses + ["good", "great"]:
                     count_all += 1
         neg_percent_gender = int((count_negative / count_all * 100)) if count_all != 0 else 0
-        print(f"{gender_group}: {neg_percent_gender}%")  
+        print(f"{gender_group}: {neg_percent_gender}%")
 
     return count_all, count_negative
 
@@ -350,7 +365,7 @@ def calculate_urgent(worksheet, negative_responses, count_all):
     for column in columns_to_count:
         count_negative = 0
         count_all = 0
-    
+
         for index, response in df[column].items():
             if response in negative_responses:
                 count_negative += 1
@@ -363,9 +378,8 @@ def calculate_urgent(worksheet, negative_responses, count_all):
 
     for column, percentage in results:
         print(f"{column}: {percentage}%")
-        
-    return count_all, count_negative
 
+    return count_all, count_negative
 
 
 def main():
