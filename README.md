@@ -19,12 +19,15 @@ In the survey, the employees are asked to give their age, gender, department the
     a. [Languages](#languages)
     b. [Frameworks and Tools](#framworks-and-tools)
     c. [Imported Libraries](#imported-libraries)
-5. [Testing](#testing)
+5. [Features](#features)
+    a. [Existing Features and Functions](#existing-features-and-functions)
+    b. [Future Features](#future-features)
+6. [Testing](#testing)
     a. [Validation testing](#validation-testing)
     b. [User testing](#user-testing)
-6. [Deployment](#deployment)
-7. [Credits](#credits)
-8. [Acknowledgments](#acknowledgments)
+7. [Deployment](#deployment)
+8. [Credits](#credits)
+9. [Acknowledgments](#acknowledgments)
 
 ## Project Goals
 
@@ -40,6 +43,7 @@ In the survey, the employees are asked to give their age, gender, department the
 
 ### Flowchart
 
+<img src="documentation/flowcharts.jpeg>
 
 ## Technologies Used
 
@@ -49,6 +53,24 @@ In the survey, the employees are asked to give their age, gender, department the
 
 ### Imported Libraries
 
+## Features
+
+### Existing Features and Functions
+
+- Welcome to the survey:
+   The first thing that comes up as you start running the program is a welcome and an explanation of what the survey is about as well as a message for the user to take their time filling it out.
+
+- Question inputs:
+   The second thing that happens is that the user is presented with five questions along with some instructions. The user is prompted to answer the questions as truthfully as possible.
+
+- Password:
+   Once the questions are answered, the user is prompted to submit the password needed to review the results. This is a feature to limit the information from the survey to a few selected people in the admin staff. The password is "admin" and any incorrect submits generate a statement telling the user the password is incorrect, to try again or to leave the survey as they are reassured that the topic of the survey will be brought up again later.
+
+- Results:
+   As one passes the correct password to the input field, the user is presented with a percentage of the amount of negative answers for six age groups and three gender groups. This can then be used for analysis on correlations between age/gender and negative opinions on the work environment.
+   This is also followed by results showing how many 
+
+### Future Features
 
 ## Testing
 
