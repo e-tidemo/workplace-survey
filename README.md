@@ -4,29 +4,34 @@ This survey was developed for a fictional web developer company to improve their
 
 In the survey, the employees are asked to give their age, gender, department they work in and then to respond to three questions using a few words on a scale from terrible to great. The questions concern the physical work environment in the office (where they were asked to consider things such as noise levels, heating, ergonomic set up at the desk, etc.), the physical environment in the break room/lunch room (with similar aspects to consider) and the third question concerns the social environment at work (where the employees were asked to think about things like how the team talked to each other, if there were any discriminatory behavior or language, if you feel like you can ask for help etc.).
 
-[View live website here]
+[View live website here](https://workplace-survey-2cd6ac8e8ed6.herokuapp.com/)
 
 ## Table of Content
 1. [Project Goals](#project-goals)
+
     a. [User Goals](#user-goals)
     b. [Site Owner Goals](#site-owner-goals)
 2. [User Experience](#user-experience)
+
     a. [Target Audience](#target-audience)
     b. [User Expectations](#user-expectations)
 3. [Technical Design](#technical-design)
+
     a. [Flowchart](#flowchart)
 4. [Technologies Used](#technologies-used)
-    a. [Languages](#languages)
-    b. [Frameworks and Tools](#framworks-and-tools)
-    c. [Imported Libraries](#imported-libraries)
+
 5. [Features](#features)
+
     a. [Existing Features and Functions](#existing-features-and-functions)
     b. [Future Features](#future-features)
 6. [Testing](#testing)
+
     a. [Validation testing](#validation-testing)
     b. [User testing](#user-testing)
 7. [Deployment](#deployment)
+
 8. [Credits](#credits)
+
 9. [Acknowledgments](#acknowledgments)
 
 ## Project Goals
@@ -51,20 +56,32 @@ If the user enters an answer that is not one of the options given, that are told
 
 The survey ends with some reassurance that this is only the beginning of the improvement of work environment and that they will work more with this in meetings and they will also be presented some of the results from the survey. This is a reassurance for the user to try and prevent that they get frustrated by the results being password protected or by how short and basic the survey is.
 
+For the employer, who is also a user, the collected data is presented in a clear way that shows percentages of negative answers since the unhappiness about the work environment is what the employer is interested in. The data that shows percentages of negative answers about each area of the work environment is presented in a sorted list from the highest percentage of negative answers to the lowest. The decision to show each area, and not just the one with the highest percentage as the most urgent area to work with, was made so that the employer/admin staff can see the nuances and decide for themselves what area is most urgent. This is because statistics cannot replace the human factor when it comes to questions like work environment.
+
 ## Technical Design
 
 ### Flowchart
 
-<img src="documentation/flowcharts.jpeg">
+![Flowchart](documentation/flowcharts.jpeg)
 
 ## Technologies Used
 
-### Languages
+Language: 
+- Python
 
-### Frameworks and Tools
+Frameworks and Tools:
+- [Git](https://git-scm.com/) used  for version control.
+- [Github]() used as online repository for secure storage
+- [Heroku]() for deployment of the project and storage of the password
 
-### Imported Libraries
+Imported Libraries:
+- `gspread` - The app uses gspread library to interact with Google Sheets where the data from the survey is sorted and stored.
+- `os` - The app uses os to access and modify environment variables (`os.environ`).
+- `pandas` - The app uses pandas for data selection and indexing and for data analysis.
+- `from operator import itemgetter` imports the itemgetter function from the operator module in Python. In the app, this is used to sort data from highest percentage to lowest.
 
+APIs:
+- Google Drive Google Sheet
 ## Features
 
 ### Existing Features and Functions
