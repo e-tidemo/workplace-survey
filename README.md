@@ -82,6 +82,7 @@ Imported Libraries:
 
 APIs:
 - Google Drive Google Sheet
+
 ## Features
 
 ### Existing Features and Functions
@@ -89,15 +90,28 @@ APIs:
 - Welcome to the survey:
    The first thing that comes up as you start running the program is a welcome and an explanation of what the survey is about as well as a message for the user to take their time filling it out.
 
+![First page](documentation/first-page.png)
+
 - Question inputs:
    The second thing that happens is that the user is presented with five questions along with some instructions. The user is prompted to answer the questions as truthfully as possible.
+
+   If the answer to the question is not one of the given options, the user is told that the data is invalid and is prompted to submit a new answer:
+![Answer is invalid - department](documentation/check-valid-answer.png)
+![Answer is invalid - age](documentation/invalid-age.png)
 
 - Password:
    Once the questions are answered, the user is prompted to submit the password needed to review the results. This is a feature to limit the information from the survey to a few selected people in the admin staff. The password is "admin" and any incorrect submits generate a statement telling the user the password is incorrect, to try again or to leave the survey as they are reassured that the topic of the survey will be brought up again later.
 
+![Password](documentation/password-stop.png)
+
+   If the password is incorrect, the user is told that the data is invalid:
+![Password is incorrect](documentation/incorrect-password.png)
+
 - Results:
    As one passes the correct password to the input field, the user is presented with a percentage of the amount of negative answers for six age groups and three gender groups. This can then be used for analysis on correlations between age/gender and negative opinions on the work environment.
    This is also followed by results showing how many percent of the answers to the questions were negative in each area of the work environment. This list is ordered from the highest percentage of negative answers to the lowest to give the employer an idea of what area is most urgent to adress according to the employees.
+
+![Results](documentation/results.png)
 
 ### Future Features
 
@@ -107,7 +121,7 @@ In the future, it would be better and more secure to move the password storage t
 
 ### Validation Testing
 
-The app was put through the PEP8 Python Linter provided by Code Institute with some small remarks about the length of some of the lines. Most of the lines were shortened as a result but some could not be shortened.
+The app was put through the PEP8 Python Linter provided by Code Institute with some small remarks about the length of some of the lines. Most of the lines were shortened as a result of the linter's output but some could not be shortened.
 
 <img src="documentation/testing-python-linter.png">
 
@@ -116,6 +130,7 @@ There were no other problems stated.
 <img src="documentation/testing-vscode.png">
 
 ### User Testing
+
 
 
 ## Deployment
