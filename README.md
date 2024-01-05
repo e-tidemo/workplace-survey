@@ -33,12 +33,23 @@ In the survey, the employees are asked to give their age, gender, department the
 
 ### a. User Goals
 
+For the user, the most important thing is that the survey is clear on what kind of a survey it is, is clear in the instructions and that it is easy to follow. For the user that fills in the survey, it is of importance to be led through the survey in a pedagogical way.
 
 ### b. Site Owner Goals
 
+The site owner in this case is the employer who would like to have some simple data to start improving the work environment at the office. The employer wants some statistics to identify what part they should begin with and some statistics that could give them an idea of whether there might be more complaints in one age or gender group than others so that they can explore why that might be and use it in the improvement work. Therefore, the site owner would like some simple questions for the employees to answer and some calculations of the statistics. 
+
+The site owner does not want all of the staff to get access to the results instantly and therefore asks for the results to be password protected.
 
 ## User Experience
 
+The user is met with a welcome message and is told what kind of a survey this is. The survey then moves straight to the first question as this is something the staff of a company is expected to do during their working hours and they might not want to spend too much time on it. So the survey is quite concise and efficient.
+
+Whilst the survey is quite efficient, it also keeps a polite and pedagogical tone throughout to make sure the users are not stressed by not understanding or by pressure to think of long winded answers. Instead, they can think about each question and choose one of the options given.
+
+If the user enters an answer that is not one of the options given, that are told directly that the only valid data are the answer options provided. This minimizes confusion on why the answer was not accepted.
+
+The survey ends with some reassurance that this is only the beginning of the improvement of work environment and that they will work more with this in meetings and they will also be presented some of the results from the survey. This is a reassurance for the user to try and prevent that they get frustrated by the results being password protected or by how short and basic the survey is.
 
 ## Technical Design
 

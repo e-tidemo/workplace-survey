@@ -132,7 +132,7 @@ def get_lunchroom_data():
         print("Consider things like the heating, noise level, ")
         print("enough space for everyone, etc. \n")
         print("Enter how you find the environment in the break room using the")
-        print(" scale 'terrible', 'bad', 'needs improvement', 'good', \n")
+        print(" scale 'terrible', 'bad', 'needs improvement', 'good', ")
         print("'great'. Please write your answer in lowercase letters.\n")
 
         lunchroom_str = input("The environment in the break room is: \n")
