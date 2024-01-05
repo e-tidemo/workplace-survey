@@ -33,6 +33,7 @@ In the survey, the employees are asked to give their age, gender, department the
 
 ### a. User Goals
 
+
 ### b. Site Owner Goals
 
 
@@ -43,7 +44,7 @@ In the survey, the employees are asked to give their age, gender, department the
 
 ### Flowchart
 
-<img src="documentation/flowcharts.jpeg>
+<img src="documentation/flowcharts.jpeg">
 
 ## Technologies Used
 
@@ -68,13 +69,23 @@ In the survey, the employees are asked to give their age, gender, department the
 
 - Results:
    As one passes the correct password to the input field, the user is presented with a percentage of the amount of negative answers for six age groups and three gender groups. This can then be used for analysis on correlations between age/gender and negative opinions on the work environment.
-   This is also followed by results showing how many 
+   This is also followed by results showing how many percent of the answers to the questions were negative in each area of the work environment. This list is ordered from the highest percentage of negative answers to the lowest to give the employer an idea of what area is most urgent to adress according to the employees.
 
 ### Future Features
+
+In the future, it would be better and more secure to move the password storage to an environment variable or a configuration file instead of storing it within the code as it is now. I did not, however, find a way to do this for this particular project and instead stored the password in the code. This does, however, make it simple to change in future developments of this application.
 
 ## Testing
 
 ### Validation Testing
+
+The app was put through the PEP8 Python Linter provided by Code Institute with some small remarks about the length of some of the lines. Most of the lines were shortened as a result but some could not be shortened.
+
+<img src="documentation/testing-python-linter.png">
+
+There were no other problems stated.
+
+<img src="documentation/testing-vscode.png">
 
 ### User Testing
 

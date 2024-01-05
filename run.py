@@ -25,9 +25,10 @@ def get_department_data():
     Get answers about what department the person answering works in
     """
     while True:
-        print("Please register what department you work in\n")
-        print("Do you work in design, hr, project management or customer service? \n")
-        print("You need to enter the name of your department in lowercase letters \n")
+        print("Please register what department you work in.\n")
+        print("Do you work in design, hr, ")
+        print("project management or customer service? \n")
+        print("Enter the name of your department in lowercase letters \n")
 
         data_str = input("Enter your department here: \n")
 
@@ -63,7 +64,7 @@ def get_gender_data():
     """
     while True:
         print("Please register your gender\n")
-        print("You need to enter your gender as male, female, or other.") 
+        print("You need to enter your gender as male, female, or other.")
         print("Remember to use lowercase letters. \n")
 
         gender_str = input("Enter your gender here: \n")
@@ -81,12 +82,15 @@ def get_office_data():
     Get answers about the physical work environment in the office
     """
     while True:
-        print("Take a moment and think about how you find the physical work environment in the office.\n")
-        print("Consider things like the heating, ergonomic aspect of your desk area, noise level, etc. \n")
-        print("You then need to enter how you feel the work environment is based on the scale 'terrible', 'bad', 'needs improvement', 'good', 'great'.\n")
+        print("Take a moment and think about how you find")
+        print("the physical work environment in the office.\n")
+        print("Consider things like the heating, ")
+        print("ergonomic aspect of your desk area, noise level, etc. \n")
+        print("Enter how you feel the work environment is using the scale")
+        print("'terrible', 'bad', 'needs improvement', 'good', 'great'.\n")
         print("Please write your answer in lowercase letters. \n")
 
-        office_str = input("Enter your view of the physical office work environment here: \n")
+        office_str = input("I think the work environment in the office is: \n")
 
         validate_office([office_str])
 
@@ -101,11 +105,13 @@ def get_social_data():
     Get answers about the social work environment
     """
     while True:
-        print("Take a moment and think about how you find the social work environment.\n")
-        print("You then need to enter how you feel the work environment is based on the scale 'terrible', 'bad', 'needs improvement', 'good', 'great'.\n")
+        print("Take a moment ")
+        print("to think about how the social work environment is.\n")
+        print("Enter how you feel the work environment is using the scale")
+        print("'terrible', 'bad', 'needs improvement', 'good', 'great'.\n")
         print("Please write your answer in lowercase letters. \n")
 
-        social_str = input("Enter your view of the social work environment here: \n")
+        social_str = input("I think the social work environment is: \n")
 
         validate_office([social_str])
 
@@ -117,15 +123,19 @@ def get_social_data():
 
 def get_lunchroom_data():
     """
-    Get answers about the physical work environment in the lunch room/ break room
+    Get answers about the physical work environment
+    in the lunch room/ break room
     """
     while True:
-        print("Take a moment and think about how you find the physical work environment in the break room/lunch room.\n")
-        print("Consider things like the heating, noise level, enough space for everyone, etc. \n")
-        print("You then need to enter how you feel the environment in the break room is based on the scale 'terrible', 'bad', 'needs improvement', 'good', 'great'.\n")
-        print("Please write your answer in lowercase letters.\n")
+        print("Take a moment and think about how you find the physical")
+        print("work environment in the break room/lunch room.\n")
+        print("Consider things like the heating, noise level, ")
+        print("enough space for everyone, etc. \n")
+        print("Enter how you find the environment in the break room using the")
+        print(" scale 'terrible', 'bad', 'needs improvement', 'good', \n")
+        print("'great'. Please write your answer in lowercase letters.\n")
 
-        lunchroom_str = input("Enter your view of the environment in the break room/lunch room here: \n")
+        lunchroom_str = input("The environment in the break room is: \n")
 
         validate_office([lunchroom_str])
 
@@ -191,7 +201,7 @@ def validate_office(values):
 
     try:
         if values[0] not in valid_office:
-            raise ValueError("The answer you have given is not one of the options in the scale from terrible to great")
+            raise ValueError("The answer you gave is not in the given scale")
     except ValueError as e:
         print(f"Invalid data: {e}, please try again. \n")
         return False
@@ -223,8 +233,11 @@ def update_sheet1_worksheet(data):
     work_worksheet = SHEET.worksheet("Sheet1")
     work_worksheet.append_row(data)
     print("Work Environment Survey worksheet updated successfully.\n")
-    print("Thank you for your participation! We will talk more about work environment and the results of this survey at our next Monday meeting. \n")
-    print("If you are admin staff you can enter a password to see the results of the survey. \n")
+    print("Thank you for your participation! ")
+    print("We will talk more about work environment")
+    print("and the results of this survey at our next Monday meeting. \n")
+    print("If you are admin staff you can enter")
+    print("your password to see the results of the survey.\n")
 
 
 def show_results_password():
@@ -233,7 +246,7 @@ def show_results_password():
         if validate_password([password_str]):
             return True
         else:
-            print("If you are part of the admin staff, re-enter the password. \n")
+            print("If you are in the admin staff, re-enter the password.\n")
 
 
 def validate_password(values):
@@ -246,7 +259,7 @@ def validate_password(values):
         if values[0] not in valid_password:
             raise ValueError("The password you have submitted is not correct")
     except ValueError as e:
-        print(f"Invalid data: {e}, please try again or leave the survey if you do not have admin access. \n")
+        print(f"Invalid data: {e}, please try again or leave the survey. \n")
         return False
 
     return True
@@ -288,7 +301,8 @@ def process_data(df):
     df['Age_Bucket'] = df['Age'].apply(age_group)
 
 
-# Count occurrences of 'terrible', 'bad' and 'needs improvement' in specified gender groups
+# Count occurrences of 'terrible', 'bad' and 'needs improvement' in
+# each gender group
 def calculate_correlation(worksheet, negative_responses):
     """
     Calculate the amount of negative responses in each age and gender group
@@ -347,7 +361,9 @@ def calculate_correlation(worksheet, negative_responses):
 
 def calculate_urgent(worksheet, negative_responses, count_all):
     """
-    Calculates the percentage of negative responses in each area of work environment and presents the area with most negative responses
+    Calculates the percentage of negative responses
+    in each area of work environment and
+    presents the area with most negative responses
     """
     data = worksheet.get_all_records()
     df = pd.DataFrame(data)
@@ -360,7 +376,8 @@ def calculate_urgent(worksheet, negative_responses, count_all):
 
     columns_to_count = ['Office', 'Social', 'Break room']
 
-    print("Amount of negative opinions in each area, presented in order from highest percentage to lowest:")
+    print("Amount of negative opinions in each area, ")
+    print("presented in order from highest percentage to lowest:")
 
     results = []
 
@@ -399,6 +416,9 @@ def main():
         pass
 
 
-print("Welcome to the first step in improving our work environment together!\n")
-print("In the following survey you will need to answer in lowercase letters. Please take some time to read the instructions that come with each question and take some time to think about your answers. \n")
+print("Welcome to the first step ")
+print("in improving our work environment together!\n")
+print("In the following survey you will need to answer in lowercase letters. ")
+print("Please take some time to read the instructions that come with ")
+print("each question and take some time to think about your answers. \n")
 main()
