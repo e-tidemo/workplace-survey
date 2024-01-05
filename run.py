@@ -418,7 +418,7 @@ def main():
 
 print("Welcome to the first step ")
 print("in improving our work environment together!\n")
-print("In the following survey you will need to answer in lowercase letters. ")
+print("In the following survey you will need to answer in lowercase letters. \n")
 print("Please take some time to read the instructions that come with ")
 print("each question and take some time to think about your answers. \n")
 main()
