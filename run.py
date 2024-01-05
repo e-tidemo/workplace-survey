@@ -25,16 +25,16 @@ def get_department_data():
     Get answers about what department the person answering works in
     """
     while True:
-        print("Please register what department you work in.\n")
+        print("\nPlease register what department you work in.\n")
         print("Do you work in design, hr, ")
         print("project management or customer service? \n")
         print("Enter the name of your department in lowercase letters \n")
 
         data_str = input("Enter your department here: \n")
 
-        validate_data([data_str])
+        is_valid = validate_data([data_str])
 
-        if validate_data([data_str]):
+        if is_valid:
             break
 
     return [data_str]
@@ -45,14 +45,14 @@ def get_age_data():
     Get answers about the age of the person answering the survey
     """
     while True:
-        print("Please register your age\n")
+        print("\nPlease register your age\n")
         print("You need to enter your age in numbers \n")
 
         age_str = input("Enter your age here: \n")
 
-        validate_age([age_str])
+        is_valid = validate_age([age_str])
 
-        if validate_age([age_str]):
+        if is_valid:
             break
 
     return [age_str]
@@ -63,15 +63,15 @@ def get_gender_data():
     Get answers about the gender of the person answering the survey
     """
     while True:
-        print("Please register your gender\n")
+        print("\nPlease register your gender\n")
         print("You need to enter your gender as male, female, or other.")
         print("Remember to use lowercase letters. \n")
 
         gender_str = input("Enter your gender here: \n")
 
-        validate_gender([gender_str])
+        is_valid = validate_gender([gender_str])
 
-        if validate_gender([gender_str]):
+        if is_valid:
             break
 
     return [gender_str]
@@ -82,7 +82,7 @@ def get_office_data():
     Get answers about the physical work environment in the office
     """
     while True:
-        print("Take a moment and think about how you find")
+        print("\nTake a moment and think about how you find")
         print("the physical work environment in the office.\n")
         print("Consider things like the heating, ")
         print("ergonomic aspect of your desk area, noise level, etc. \n")
@@ -92,9 +92,9 @@ def get_office_data():
 
         office_str = input("I think the work environment in the office is: \n")
 
-        validate_office([office_str])
+        is_valid = validate_office([office_str])
 
-        if validate_office([office_str]):
+        if is_valid:
             break
 
     return [office_str]
@@ -105,7 +105,7 @@ def get_social_data():
     Get answers about the social work environment
     """
     while True:
-        print("Take a moment ")
+        print("\nTake a moment ")
         print("to think about how the social work environment is.\n")
         print("Enter how you feel the work environment is using the scale")
         print("'terrible', 'bad', 'needs improvement', 'good', 'great'.\n")
@@ -113,9 +113,9 @@ def get_social_data():
 
         social_str = input("I think the social work environment is: \n")
 
-        validate_office([social_str])
+        is_valid = validate_office([social_str])
 
-        if validate_office([social_str]):
+        if is_valid:
             break
 
     return [social_str]
@@ -127,7 +127,7 @@ def get_lunchroom_data():
     in the lunch room/ break room
     """
     while True:
-        print("Take a moment and think about how you find the physical")
+        print("\nTake a moment and think about how you find the physical")
         print("work environment in the break room/lunch room.\n")
         print("Consider things like the heating, noise level, ")
         print("enough space for everyone, etc. \n")
@@ -137,9 +137,9 @@ def get_lunchroom_data():
 
         lunchroom_str = input("The environment in the break room is: \n")
 
-        validate_office([lunchroom_str])
+        is_valid = validate_office([lunchroom_str])
 
-        if validate_office([lunchroom_str]):
+        if is_valid:
             break
 
     return [lunchroom_str]
