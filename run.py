@@ -310,8 +310,6 @@ def calculate_correlation(worksheet, negative_responses):
     data = worksheet.get_all_records()
     df = pd.DataFrame(data)
 
-    print("Columns in DataFrame:")
-    print(df.columns)
     process_data(df)
 
     negative_responses = ["terrible", "bad", "needs improvement"]
@@ -368,8 +366,6 @@ def calculate_urgent(worksheet, negative_responses, count_all):
     data = worksheet.get_all_records()
     df = pd.DataFrame(data)
 
-    print("Columns in DataFrame:")
-    print(df.columns)
     process_data(df)
 
     negative_responses = ["terrible", "bad", "needs improvement"]

@@ -56,7 +56,7 @@ If the user enters an answer that is not one of the options given, that are told
 
 The survey ends with some reassurance that this is only the beginning of the improvement of work environment and that they will work more with this in meetings and they will also be presented some of the results from the survey. This is a reassurance for the user to try and prevent that they get frustrated by the results being password protected or by how short and basic the survey is.
 
-For the employer, who is also a user, the collected data is presented in a clear way that shows percentages of negative answers since the unhappiness about the work environment is what the employer is interested in. The data that shows percentages of negative answers about each area of the work environment is presented in a sorted list from the highest percentage of negative answers to the lowest. The decision to show each area, and not just the one with the highest percentage as the most urgent area to work with, was made so that the employer/admin staff can see the nuances and decide for themselves what area is most urgent. This is because statistics cannot replace the human factor when it comes to questions like work environment.
+For the employer, who is also a user of sorts, the collected data is presented in a clear way that shows percentages of negative answers since the unhappiness about the work environment is what the employer is interested in. The data that shows percentages of negative answers about each area of the work environment is presented in a sorted list from the highest percentage of negative answers to the lowest. The decision to show each area, and not just the one with the highest percentage as the most urgent area to work with, was made so that the employer/admin staff can see the nuances and decide for themselves what area is most urgent. This is because statistics cannot replace the human factor when it comes to questions like work environment.
 
 ## Technical Design
 
@@ -71,8 +71,8 @@ Language:
 
 Frameworks and Tools:
 - [Git](https://git-scm.com/) used  for version control.
-- [Github]() used as online repository for secure storage
-- [Heroku]() for deployment of the project and storage of the password
+- [Github](https://github.com/e-tidemo/workplace-survey) used as online repository for secure storage
+- [Heroku](https://dashboard.heroku.com/apps) for deployment of the project and storage of the password
 
 Imported Libraries:
 - `gspread` - The app uses gspread library to interact with Google Sheets where the data from the survey is sorted and stored.
@@ -96,6 +96,7 @@ APIs:
    The second thing that happens is that the user is presented with five questions along with some instructions. The user is prompted to answer the questions as truthfully as possible.
 
    If the answer to the question is not one of the given options, the user is told that the data is invalid and is prompted to submit a new answer:
+
 ![Answer is invalid - department](documentation/check-valid-answer.png)
 ![Answer is invalid - age](documentation/invalid-age.png)
 
