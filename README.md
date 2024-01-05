@@ -12,10 +12,12 @@ In the survey, the employees are asked to give their age, gender, department the
 1. [Project Goals](#project-goals)
 
     a. [User Goals](#user-goals)
+
     b. [Site Owner Goals](#site-owner-goals)
 2. [User Experience](#user-experience)
 
     a. [Target Audience](#target-audience)
+
     b. [User Expectations](#user-expectations)
 3. [Technical Design](#technical-design)
 
@@ -25,10 +27,12 @@ In the survey, the employees are asked to give their age, gender, department the
 5. [Features](#features)
 
     a. [Existing Features and Functions](#existing-features-and-functions)
+
     b. [Future Features](#future-features)
 6. [Testing](#testing)
 
     a. [Validation testing](#validation-testing)
+
     b. [User testing](#user-testing)
 7. [Deployment](#deployment)
 
@@ -38,11 +42,11 @@ In the survey, the employees are asked to give their age, gender, department the
 
 ## Project Goals
 
-### a. User Goals
+### User Goals
 
 The intended user is an employer and their employees who intend to improve both the physical and social work environment at their place of work. For the user, the most important thing is that the survey is clear on what kind of a survey it is, is clear in the instructions and that it is easy to follow. For the user that fills in the survey, it is of importance to be led through the survey in a pedagogical way.
 
-### b. Site Owner Goals
+### Site Owner Goals
 
 The site owner in this case is the employer who would like to have some simple data to start improving the work environment at the office. The employer wants some statistics to identify what part they should begin with and some statistics that could give them an idea of whether there might be more complaints in one age or gender group than others so that they can explore why that might be and use it in the improvement work. Therefore, the site owner would like some simple questions for the employees to answer and some calculations of the statistics. 
 
@@ -74,8 +78,8 @@ Language:
 - Python
 
 Frameworks and Tools:
-- [Git](https://git-scm.com/) used  for version control.
-- [Github](https://github.com/e-tidemo/workplace-survey) used as online repository for secure storage
+- [Git](https://git-scm.com/) used  for version control.(`git init` used to create a git repository)
+- [GitHub](https://github.com/e-tidemo/workplace-survey) used as online repository for secure storage (`git add`, `git commit`, `git push` were used to save and push continuously to the GitHub repository)
 - [Heroku](https://dashboard.heroku.com/apps) for deployment of the project and storage of the password
 
 Imported Libraries:
@@ -165,8 +169,38 @@ The app was also puth through a lighthouse testing:
 
 ## Deployment
 
+1. Set up Google Cloud Project:
+I set up a Google Cloud project in the [Google Cloud Console](https://console.cloud.google.com/welcome?project=workplace-survey) and created a project named "workplace survey". I then enabled Google Sheet and Google Drive APIs to be able to use Google Sheets for my survey data.
+
+Within the Google Cloud Console, I also vreated credentials by going to "APIs & Services > Credentials" and clicking "create credentials" and choosing "service account key". I then created a new service account wit the Editor rolse and created a key in JSON format and download said JSON file with credentials the application needs to access the Google Cloud Services.
+
+2. Deploy to Heroku:
+The application was deployed to Heroku by following these steps:
+
+- Make a list of requirements in a requirements.txt-file by typing ”pip3 freeze >requirements.txt” into the terminal. This saves any libraries that need to be installed to the project files in Heroku.
+- Login to Heroku (or create an account)
+- Select "Create new app"
+- Give the app a name and choose your region
+- Go to the "settings" tab and add the Python build pack and then the node.js build pack.
+- Create a "config VAR" with the key of CREDS and value the content of the creds.json file that was created in the Google Cloud Console.
+- Create a second "config VAR" with the key "ADMIN" and the value "admin" which is the password to show the results in the app. This way, the password is stored securely.
+- Go to the "Deploy" tab and choose GitHub as a deployment method.
+- Search for the right GitHub repository to connect to.
+- Choose "enable automatic deploys" and then deploy branch.
+- Wait until the app is built and then click on the "View" link.
+
+3. To run locally:
+- Once logged into GitHub, click on repository to download.
+- Select **Code** and click "download the zip file".
+- Extract the zip file and use it in your local environment.
+
+You can also **Clone** or **Fork** this repository in your own GitHub account.
 
 ## Credits
-Age group definitions are from [https://towardsdatascience.com/cleaning-analyzing-and-visualizing-survey-data-in-python-42747a13c713]
+
+The code for age group definitions are from [Towardsdatascience](https://towardsdatascience.com/cleaning-analyzing-and-visualizing-survey-data-in-python-42747a13c713)
+Instructions on how to get the survey data into Python were taken from [Dataquest](https://www.dataquest.io/blog/how-to-analyze-survey-data-python-beginner/)
 
 ## Acknowledgments
+
+I would like to direct a huge thank you to my mentor, Spencer Barriball, who has shown great patience with me and who has offered some great help to me, not least when I was struggling a bit with the deployment.

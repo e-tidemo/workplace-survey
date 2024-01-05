@@ -303,6 +303,8 @@ def process_data(df):
 
 # Count occurrences of 'terrible', 'bad' and 'needs improvement' in
 # each gender group
+# Instructions on using pandas library to get survey data into Python
+# is from Dataquest - see credits in README
 def calculate_correlation(worksheet, negative_responses):
     """
     Calculate the amount of negative responses in each age and gender group
