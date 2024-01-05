@@ -4,7 +4,9 @@ This survey was developed for a fictional web developer company to improve their
 
 In the survey, the employees are asked to give their age, gender, department they work in and then to respond to three questions using a few words on a scale from terrible to great. The questions concern the physical work environment in the office (where they were asked to consider things such as noise levels, heating, ergonomic set up at the desk, etc.), the physical environment in the break room/lunch room (with similar aspects to consider) and the third question concerns the social environment at work (where the employees were asked to think about things like how the team talked to each other, if there were any discriminatory behavior or language, if you feel like you can ask for help etc.).
 
-[View live website here](https://workplace-survey-2cd6ac8e8ed6.herokuapp.com/)
+[View the work evnironment survey app here](https://workplace-survey-2cd6ac8e8ed6.herokuapp.com/)
+
+![Start page](documentation/first-page.png)
 
 ## Table of Content
 1. [Project Goals](#project-goals)
@@ -38,7 +40,7 @@ In the survey, the employees are asked to give their age, gender, department the
 
 ### a. User Goals
 
-For the user, the most important thing is that the survey is clear on what kind of a survey it is, is clear in the instructions and that it is easy to follow. For the user that fills in the survey, it is of importance to be led through the survey in a pedagogical way.
+The intended user is an employer and their employees who intend to improve both the physical and social work environment at their place of work. For the user, the most important thing is that the survey is clear on what kind of a survey it is, is clear in the instructions and that it is easy to follow. For the user that fills in the survey, it is of importance to be led through the survey in a pedagogical way.
 
 ### b. Site Owner Goals
 
@@ -59,6 +61,8 @@ The survey ends with some reassurance that this is only the beginning of the imp
 For the employer, who is also a user of sorts, the collected data is presented in a clear way that shows percentages of negative answers since the unhappiness about the work environment is what the employer is interested in. The data that shows percentages of negative answers about each area of the work environment is presented in a sorted list from the highest percentage of negative answers to the lowest. The decision to show each area, and not just the one with the highest percentage as the most urgent area to work with, was made so that the employer/admin staff can see the nuances and decide for themselves what area is most urgent. This is because statistics cannot replace the human factor when it comes to questions like work environment.
 
 ## Technical Design
+
+The flowchart below was used as the foundation for the technical build of the survey.
 
 ### Flowchart
 
@@ -112,11 +116,11 @@ APIs:
    As one passes the correct password to the input field, the user is presented with a percentage of the amount of negative answers for six age groups and three gender groups. This can then be used for analysis on correlations between age/gender and negative opinions on the work environment.
    This is also followed by results showing how many percent of the answers to the questions were negative in each area of the work environment. This list is ordered from the highest percentage of negative answers to the lowest to give the employer an idea of what area is most urgent to adress according to the employees.
 
-![Results](documentation/results.png)
+![Results](documentation/results1.png)
 
 ### Future Features
 
-In the future, it would be better and more secure to move the password storage to an environment variable or a configuration file instead of storing it within the code as it is now. I did not, however, find a way to do this for this particular project and instead stored the password in the code. This does, however, make it simple to change in future developments of this application.
+In the future, the user experience could be improved by showing only one part of the survey at a time instead of keeping everything in as you go along.
 
 ## Testing
 
@@ -124,15 +128,40 @@ In the future, it would be better and more secure to move the password storage t
 
 The app was put through the PEP8 Python Linter provided by Code Institute with some small remarks about the length of some of the lines. Most of the lines were shortened as a result of the linter's output but some could not be shortened.
 
-<img src="documentation/testing-python-linter.png">
+![python linter test](documentation/testing-python-linter.png)
 
 There were no other problems stated.
 
-<img src="documentation/testing-vscode.png">
+![problems terminal in VSCode](documentation/testing-vscode.png)
 
-### User Testing
+The app was also puth through a lighthouse testing:
 
+![Lighthouse testing](documentation/lighthouse-workplace.png)
 
+### Features Testing
+
+| Questions input |Result  |
+|--|--|
+|Run the program and enter one of the options given (department, gender, terrible-great).| Pass |
+|Verify that the program accepts valid inputs (e.g. terrible, bad, needs improvement, good, great) and rejects invalid inputs.| Pass|
+|Keep looping the program until a valid input is provided.|Pass|
+
+| Age question input |Result  |
+|--|--|
+|Run the program and enter age.| Pass |
+|Verify that the program accepts valid inputs (ages between 18 and 70) and rejects invalid inputs.| Pass|
+|Keep looping the program until a valid input is provided.|Pass|
+
+| Password |Result  |
+|--|--|
+|Enter a password.| Pass |
+|Verify that the program only accepts one valid password.| Pass|
+|Keep looping the program until the correct password is provided.|Pass|
+
+| Results shown |Result  |
+|--|--|
+|Show the results of negative answers in different age groups, gender groups and different areas of work environment| Pass |
+|Sort the areas of work environment from the one with highest percentage of negative responses to the lowest| Pass|
 
 ## Deployment
 
