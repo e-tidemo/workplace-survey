@@ -200,8 +200,9 @@ You can also **Clone** or **Fork** this repository in your own GitHub account.
 
 ## Credits
 
-The code for age group definitions are from [Towardsdatascience](https://towardsdatascience.com/cleaning-analyzing-and-visualizing-survey-data-in-python-42747a13c713)
-Instructions on how to get the survey data into Python were taken from [Dataquest](https://www.dataquest.io/blog/how-to-analyze-survey-data-python-beginner/)
+- The code for age group definitions are from [Towardsdatascience](https://towardsdatascience.com/cleaning-analyzing-and-visualizing-survey-data-in-python-42747a13c713)
+
+- Instructions on how to get the survey data into Python were taken from [Dataquest](https://www.dataquest.io/blog/how-to-analyze-survey-data-python-beginner/)
 
 ## Acknowledgments
 
