@@ -138,7 +138,7 @@ There were no other problems stated.
 
 ![problems terminal in VSCode](documentation/testing-vscode.png)
 
-The app was also puth through a lighthouse testing:
+The app was also puth through a lighthouse testing with the following results:
 
 ![Lighthouse testing](documentation/lighthouse-workplace.png)
 
@@ -170,11 +170,13 @@ The app was also puth through a lighthouse testing:
 ## Deployment
 
 1. Set up Google Cloud Project:
+
 I set up a Google Cloud project in the [Google Cloud Console](https://console.cloud.google.com/welcome?project=workplace-survey) and created a project named "workplace survey". I then enabled Google Sheet and Google Drive APIs to be able to use Google Sheets for my survey data.
 
-Within the Google Cloud Console, I also vreated credentials by going to "APIs & Services > Credentials" and clicking "create credentials" and choosing "service account key". I then created a new service account wit the Editor rolse and created a key in JSON format and download said JSON file with credentials the application needs to access the Google Cloud Services.
+Within the Google Cloud Console, I also created credentials by going to "APIs & Services > Credentials" and clicking "create credentials" and choosing "service account key". I then created a new service account wit the Editor rolse and created a key in JSON format and download said JSON file with credentials the application needs to access the Google Cloud Services.
 
 2. Deploy to Heroku:
+
 The application was deployed to Heroku by following these steps:
 
 - Make a list of requirements in a requirements.txt-file by typing ”pip3 freeze >requirements.txt” into the terminal. This saves any libraries that need to be installed to the project files in Heroku.
